@@ -23,6 +23,7 @@
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet">
@@ -77,10 +78,10 @@
 			<div class="colorlib-footer">
 
 				<ul>
-					<li><a href="#"><i class="icon-facebook2"></i></a></li>
-					<li><a href="#"><i class="icon-twitter2"></i></a></li>
-					<li><a href="#"><i class="icon-instagram"></i></a></li>
-					<li><a href="#"><i class="icon-linkedin2"></i></a></li>
+					<li><a href="#"><i class="fab fa-github"></i></a></li>
+					<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+					<li><a href="#"><i class="fab fa-kaggle"></i></a></li>
+					<li><a href="#"><i class="fab fa-instagram"></i></a></li>
 				</ul>
 			</div>
 
@@ -139,73 +140,47 @@
 							<h2 class="colorlib-heading animate-box">My Skills</h2>
 						</div>
 					</div>
+					{% for skill in skills %}
+					<div class="row">
+						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+							<div class="progress-wrap">
+								<h3>{{skill.topic}}</h3>
+								<p>{{skill.topic.name}}</p>
+	
+							</div>
+						</div>
+					</div>
+					{% empty %}
+					    <h3>No skills found</h3>
+					{% endfor %}
+				</div>
+			</section>
+
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+			<section class="colorlib-skills" data-section="skills">
+				<div class="colorlib-narrow-content">
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+							<span class="heading-meta">My Accomplishments</span>
+							<h2 class="colorlib-heading animate-box">Certificates</h2>
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 							<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
 						</div>
+			
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="progress-wrap">
-								<h3>Photoshop</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-1" role="progressbar" aria-valuenow="75"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:75%">
-								    <span>75%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="progress-wrap">
-								<h3>jQuery</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-2" role="progressbar" aria-valuenow="60"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:60%">
-								    <span>60%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="progress-wrap">
-								<h3>HTML5</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-3" role="progressbar" aria-valuenow="85"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:85%">
-								    <span>85%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="progress-wrap">
-								<h3>CSS3</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-4" role="progressbar" aria-valuenow="90"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:90%">
-								    <span>90%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="progress-wrap">
-								<h3>WordPress</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-5" role="progressbar" aria-valuenow="70"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:70%">
-								    <span>70%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="progress-wrap">
-								<h3>SEO</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-6" role="progressbar" aria-valuenow="80"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:80%">
-								    <span>80%</span>
-								  	</div>
+							<div class="certificate">
+								<span class="company-logo" style="font-size: 24px;"> <!-- Adjust size as needed -->
+									<i class="fab fa-github"></i> <!-- Replace with the appropriate icon class -->
+								</span>
+								<h3 class="course-name" style="font-size: 16px; display: inline; margin-left: 10px;">Course Name</h3> <!-- Smaller and inline -->
+								<div class="issued-date" style="margin-top: 10px;">Issued on: YYYY-MM-DD</div> <!-- Issued date above the button -->
+								<div class="credential">
+									<button class="btn btn-primary" onclick="window.location.href='verification-link.html'">
+										View Credential
+									</button>
 								</div>
 							</div>
 						</div>
@@ -325,86 +300,28 @@
 							<p class="work-menu"><span><a href="#" class="active">Graphic Design</a></span> <span><a href="#">Web Design</a></span> <span><a href="#">Software</a></span> <span><a href="#">Apps</a></span></p>
 						</div>
 					</div>
-					
+					{% for project in projects %}
 					<div class="row">
-						{% for project in projects %}
-						
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(images/img-1.jpg);">
+							<div class="project" style="background-image: url('{{project.image.url}}');">
 								<div class="desc">
 									<div class="con">
-										<h3><a href="work.html">Work 01</a></h3>
+										<h3><a href="work.html">{{project.title}}</a></h3>
 										<span>Website</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
 									</div>
 								</div>
 							</div>
 						</div>
-					    {% empty %}
+					{% empty %}
 					    <h3>No projects found</h3>
-					    {% endfor %}
+					{% endfor %}
 						
 					</div>
-					<div class="row">
-						<div class="col-md-12 animate-box">
-							<p><a href="#" class="btn btn-primary btn-lg btn-load-more">Load more <i class="icon-reload"></i></a></p>
-						</div>
-					</div>
+					
 				</div>
 			</section>
 
-			<section class="colorlib-blog" data-section="blog">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Read</span>
-							<h2 class="colorlib-heading">Recent Blog</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="images/blog-1.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>April 14, 2018 </small> | <small> Web Design </small> | <small> <i class="icon-bubble3"></i> 4</small></span>
-									<h3><a href="blog.html">Renovating National Gallery</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="images/blog-2.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>April 14, 2018 </small> | <small> Web Design </small> | <small> <i class="icon-bubble3"></i> 4</small></span>
-									<h3><a href="blog.html">Wordpress for a Beginner</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="images/blog-3.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>April 14, 2018 </small> | <small> Inspiration </small> | <small> <i class="icon-bubble3"></i> 4</small></span>
-									<h3><a href="blog.html">Make website from scratch</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 animate-box">
-							<p><a href="#" class="btn btn-primary btn-lg btn-load-more">Load more <i class="icon-reload"></i></a></p>
-						</div>
-					</div>
-				</div>
-			</section>
-
+			
 			<section class="colorlib-contact" data-section="contact">
 				<div class="colorlib-narrow-content">
 					<div class="row">
