@@ -41,8 +41,21 @@ class Skill(models.Model):
 
 class Topic(models.Model):
     skill = models.ForeignKey(Skill, related_name='topics', on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100,blank=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
+class About(models.Model):
+    text = models.TextField()
+    image = models.ImageField(null=True)
+
+    def __str__(self):
+        return self.text

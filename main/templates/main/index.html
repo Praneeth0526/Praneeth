@@ -58,7 +58,9 @@
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
 		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
 			<div class="text-center">
-				<div class="author-img" style="background-image: url('{% static 'images/about.jpeg' %}');"></div>
+				{% for a in about %}
+				<div class="author-img" style="background-image: url('{{a.image.url}}');"></div>
+				{% endfor %}
 				<h1 id="colorlib-logo"><a href="index.html">Praneeth G</a></h1>
 				<span class="position"><a href="#">Data Science and Engineering enthusiast</a></span>
 			</div>
@@ -121,8 +123,9 @@
 									<div class="about-desc">
 										<span class="heading-meta">About Me</span>
 										<h2 class="colorlib-heading animate-box">Who Am I?</h2>
-							
-										<p><strong>Hi, I'm Praneeth,</strong> a Computer Science Engineering student at Vidyavardhaka College of Engineering, Mysuru. Passionate about full-stack development, AI, and data science, I specialize in building dynamic web applications using Django and other modern technologies. My focus is on creating innovative solutions that address real-world challenges. I’m continuously expanding my expertise through hands-on projects and certifications.
+							        {% for a in about %}
+										<p>{{a.text}}</p>
+									{% endfor %}
 							</div>
 							
 				
@@ -130,7 +133,6 @@
 					</div>
 				</div>
 			</section>
-
 
 			<section class="colorlib-skills" data-section="skills">
 				<div class="colorlib-narrow-content">
@@ -141,17 +143,21 @@
 						</div>
 					</div>
 					{% for skill in skills %}
-					<div class="row">
+					<div class="row" style="margin-bottom: 10px;"> <!-- Reduced margin-bottom -->
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="progress-wrap">
-								<h3>{{skill.topic}}</h3>
-								<p>{{skill.topic.name}}</p>
-	
+							<div class="progress-wrap" style="margin-left: 20px;">
+								<h3 class="colorlib-heading animate-box">{{ skill.topic }}</h3>
+								{% for topic in skill.topics.all %}
+									<li style="margin-left: 40px; display: flex; align-items: center;"> <!-- Flexbox for horizontal alignment -->
+										<li><p style="margin-right: 10px; font-weight: bold;">{{ topic.name }}</p><!-- Bold name with margin-right -->
+										<p>{{ topic.description }}</p></li>
+									</li>
+								{% endfor %}
 							</div>
 						</div>
 					</div>
 					{% empty %}
-					    <h3>No skills found</h3>
+						<h3>No skills found</h3>
 					{% endfor %}
 				</div>
 			</section>
@@ -166,9 +172,6 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-							<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-						</div>
 			
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="certificate">
@@ -200,39 +203,20 @@
 						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 							<div class="fancy-collapse-panel">
 								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="headingOne">
-									        <h4 class="panel-title">
-									            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Master Degree Graphic Design
-									            </a>
-									        </h4>
-									    </div>
-									    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-									         <div class="panel-body">
-									            <div class="row">
-										      		<div class="col-md-6">
-										      			<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-										      		</div>
-										      		<div class="col-md-6">
-										      			<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-										      		</div>
-										      	</div>
-									         </div>
-									    </div>
-									</div>
+			
 									<div class="panel panel-default">
 									    <div class="panel-heading" role="tab" id="headingTwo">
 									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Bachelor Degree of Computer Science
+									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Bachelor Degree
 									            </a>
 									        </h4>
 									    </div>
 									    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 									        <div class="panel-body">
-									            <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+									            <p>B.E in Computer Science,<strong>Vidyavardhaka College of Engineering</strong>,Mysuru, Karnataka.</p>
 													<ul>
-														<li>Separated they live in Bookmarksgrove right</li>
-														<li>Separated they live in Bookmarksgrove right</li>
+														<li>Duration 2023-2027</li>
+														
 													</ul>
 									        </div>
 									    </div>
@@ -240,44 +224,22 @@
 									<div class="panel panel-default">
 									    <div class="panel-heading" role="tab" id="headingThree">
 									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Diploma in Information Technology
+									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Pre-University Education
 									            </a>
 									        </h4>
 									    </div>
 									    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 									        <div class="panel-body">
-									            <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>	
+									            <p>P.U.C at <strong>Gopal Swamy PU College(Sankalpa)</strong>, Mysuru, Karnataka.</p>
+												<ul>
+													<li>Duration 2021-2023</li>
+													
+												</ul>	
 									        </div>
 									    </div>
 									</div>
 
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="headingFour">
-									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Diploma in Information Technology
-									            </a>
-									        </h4>
-									    </div>
-									    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-									        <div class="panel-body">
-									            <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>	
-									        </div>
-									    </div>
-									</div>
-
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="headingFive">
-									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">High School Secondary Education
-									            </a>
-									        </h4>
-									    </div>
-									    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-									        <div class="panel-body">
-									            <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>	
-									        </div>
-									    </div>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -306,8 +268,8 @@
 							<div class="project" style="background-image: url('{{project.image.url}}');">
 								<div class="desc">
 									<div class="con">
-										<h3><a href="work.html">{{project.title}}</a></h3>
-										<span>Website</span>
+										<h3><a href={{project.link}}>{{project.title}}</a></h3>
+										<span>{{project.description}}</span>
 									</div>
 								</div>
 							</div>
