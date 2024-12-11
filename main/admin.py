@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Tag, Skill, Topic,About
+from .models import Project, Tag, Skill, Topic,About,Certificate,Contact
 
 # Inline for Project Images
 # class ProjectImageInline(admin.TabularInline):
@@ -16,9 +16,6 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
 
-# class SkillAdmin(admin.ModelAdmin):
-#     list_display = ('topic',)
-#     search_fields = ('topic',)
 
 class TopicInline(admin.TabularInline):
     model = Topic
@@ -30,8 +27,9 @@ class SkillAdmin(admin.ModelAdmin):
     inlines = [TopicInline]
 
 class AboutAdmin(admin.ModelAdmin):
-    list_display = ('text', 'image')
+    list_display = ('text', 'image', 'cv')
     search_fields = ('text',)
+
 
 
 # Register models with the admin site
@@ -40,3 +38,5 @@ admin.site.register(Project, ProjectAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Topic)
 admin.site.register(About, AboutAdmin)
+admin.site.register(Certificate)
+admin.site.register(Contact)

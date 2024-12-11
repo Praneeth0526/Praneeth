@@ -46,16 +46,26 @@ class Topic(models.Model):
 
     def __str__(self):
         return self.name
-class Contact(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-    message = models.TextField()
-
-    def __str__(self):
-        return self.name
 class About(models.Model):
     text = models.TextField()
     image = models.ImageField(null=True)
+    cv = models.FileField(upload_to='cv/',null=True)
 
     def __str__(self):
         return self.text
+    
+class Certificate(models.Model):
+    title = models.CharField(max_length=100)
+    date = models.DateField()
+    link = models.URLField(max_length=200, blank=True)
+
+    def __str__(self):
+        return self.title
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    subject = models.CharField(max_length=100)
+    message = models.TextField()
+
+
+    def __str__(self):
+        return self.name
