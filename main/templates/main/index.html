@@ -71,9 +71,10 @@
 					<ul>
 						<li class="active"><a href="#" data-nav-section="home">Home</a></li>
 						<li><a href="#" data-nav-section="about">About</a></li>
-						<li><a href="#" data-nav-section="skills">Skills</a></li>
-						<li><a href="#" data-nav-section="certificate">Certificates</a></li>
 						<li><a href="#" data-nav-section="education">Education</a></li>
+						<!-- <li><a href="#" data-nav-section="skills">Skills</a></li> -->
+						<li><a href="#" data-nav-section="certificate">Certificates</a></li>
+						
 						<li><a href="#" data-nav-section="work">Work</a></li>
 						<li><a href="#" data-nav-section="contact">Contact</a></li>
 					</ul>
@@ -140,99 +141,12 @@
 				</div>
 			</section>
 
-			<section class="colorlib-skills" data-section="skills">
-    <div class="colorlib-narrow-content">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-                <span class="heading-meta">My Specialty</span>
-                <h2 class="colorlib-heading animate-box">My Skills</h2>
-            </div>
-        </div>
-        {% for skill in skills %}
-        <div class="row" style="margin-bottom: 10px;">
-            <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-                <div class="progress-wrap" style="margin-left: 0px;">
-                    <li><h3 class="colorlib-heading animate-box">{{ skill.topic }}</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>
-                            <p style="font-weight: bold; margin: 0;">
-							<ul style="margin-left: 40px; display: flex; flex-direction: column; align-items: flex-start;"> <!-- Flexbox for vertical alignment -->
-								{% for topic in skill.topics.all %}
-									<li>
-										<p style="font-weight: bold;">{{ topic.name }}</p>
-										{% if topic.description %}
-											<p>{{ topic.description }}</p>
-										{% endif %}
-									</li>
-								{% endfor %}
-							</ul>
-                            </p>
-                        </li>
-                    </ul>
-                    </li>
-                </div>
-            </div>
-        </div>
-        {% empty %}
-            <h3>No skills found</h3>
-        {% endfor %}
-    </div>
-</section>
-
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-			<section class="colorlib-skills" data-section="certificate">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">My Accomplishments</span>
-							<h2 class="colorlib-heading animate-box">Certificates</h2>
-						</div>
-					</div>
-					<div class="row">
-			
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="certificate">
-								{% for certificate in certificates %}
-								<li>
-								<p class="course-name" style="font-size: 16px; display: inline; font-weight: bold;">{{certificate.title}}</p> <!-- Smaller and inline -->
-								
-								<div class="issued-date" style="margin-top: 10px;">Issued on: {{certificate.date}}</div> <!-- Issued date above the button -->
-								<div class="credential">
-									<button class="btn btn-primary" onclick="window.location.href='{{certificate.link}}'">
-										View Credential
-									</button>
-								</div>
-								</li>
-								{% endfor %}
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
 			<section class="colorlib-education" data-section="education">
 				<div class="colorlib-narrow-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
 							<span class="heading-meta">Education</span>
-							<nav id="colorlib-main-menu" role="navigation" class="navbar navbar-expand-lg">
-								<div class="container">
-									<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-										<span class="hamburger-icon"></span>
-									</button>
-									<div id="navbar" class="collapse navbar-collapse">
-										<ul>
-											<li class="active"><a href="#" data-nav-section="home">Home</a></li>
-											<li><a href="#" data-nav-section="about">About</a></li>
-											<li><a href="#" data-nav-section="skills">Skills</a></li>
-											<li><a href="#" data-nav-section="certificate">Certificates</a></li>
-											<li><a href="#" data-nav-section="education">Education</a></li>
-											<li><a href="#" data-nav-section="work">Work</a></li>
-											<li><a href="#" data-nav-section="contact">Contact</a></li>
-										</ul>
-									</div>
-								</div>
-							</nav>	<h2 class="colorlib-heading animate-box">Education</h2>
+							<h2 class="colorlib-heading animate-box">Education</h2>
 						</div>
 					</div>
 					<div class="row">
@@ -282,6 +196,77 @@
 					</div>
 				</div>
 			</section>
+
+<!-- <section class="colorlib-skills" data-section="skills">
+    <div class="colorlib-narrow-content">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+                <span class="heading-meta">My Specialty</span>
+                <h2 class="colorlib-heading animate-box">My Skills</h2>
+            </div>
+        </div>
+        {% for skill in skills %}
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+                <div class="progress-wrap" style="margin-left: 0px;">
+                    <li><h3 class="colorlib-heading animate-box">{{ skill.topic }}</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>
+                            <p style="font-weight: bold; margin: 0;">
+							<ul style="margin-left: 40px; display: flex; flex-direction: column; align-items: flex-start;"> <!-- Flexbox for vertical alignment -->
+								<!-- {% for topic in skill.topics.all %}
+									<li>
+										<p style="font-weight: bold;">{{ topic.name }}</p>
+										{% if topic.description %}
+											<p>{{ topic.description }}</p>
+										{% endif %}
+									</li>
+								{% endfor %}
+							</ul>
+                            </p>
+                        </li>
+                    </ul>
+                    </li>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <h3>No skills found</h3>
+        {% endfor %}
+    </div>
+</section> -->
+
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+			<section class="colorlib-skills" data-section="certificate">
+				<div class="colorlib-narrow-content">
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+							<span class="heading-meta">My Accomplishments</span>
+							<h2 class="colorlib-heading animate-box">Certificates</h2>
+						</div>
+					</div>
+					<div class="row">
+			
+						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+							<div class="certificate">
+								{% for certificate in certificates %}
+								<li>
+								<p class="course-name" style="font-size: 16px; display: inline; font-weight: bold;">{{certificate.title}}</p> <!-- Smaller and inline -->
+								
+								<div class="issued-date" style="margin-top: 10px;">Issued on: {{certificate.date}}</div> <!-- Issued date above the button -->
+								<div class="credential">
+									<button class="btn btn-primary" onclick="window.location.href='{{certificate.link}}'">
+										View Credential
+									</button>
+								</div>
+								</li>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
 
 <section class="colorlib-work" data-section="work">
     <div class="colorlib-narrow-content">
