@@ -1396,6 +1396,49 @@ body.offcanvas {
       opacity: 1;
       visibility: visible; } }
 
+.hamburger-icon {
+    display: inline-block;
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    position: absolute;
+    left: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger-icon::before {
+    top: -10px;
+}
+
+.hamburger-icon::after {
+    top: 10px;
+}
+
+.js-colorlib-nav-toggle.colorlib-nav-toggle.active .hamburger-icon {
+    background-color: transparent;
+}
+
+.js-colorlib-nav-toggle.colorlib-nav-toggle.active .hamburger-icon::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.js-colorlib-nav-toggle.colorlib-nav-toggle.active .hamburger-icon::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
 @media screen and (max-width: 480px) {
   .col-xxs-12 {
     float: none;
@@ -1431,4 +1474,19 @@ body.offcanvas {
     margin: 10px 0; /* Adjust spacing as needed */
     font-size: 14px; /* Adjust font size as needed */
     color: #666; /* Change color as needed */
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.badge {
+  font-size: 12px; /* Make the tags smaller */
+  margin-left: 5px; /* Add some space between tags */
+  padding: 3px 6px; /* Adjust padding for smaller size */
+  background-color: rgb(95, 95, 95); /* Change badge color to white */
+  color: black; /* Change text color to black */
 }

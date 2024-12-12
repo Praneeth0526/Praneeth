@@ -306,5 +306,12 @@
 		owlCrouselFeatureSlide();
 	});
 
+	document.addEventListener('DOMContentLoaded', function() {
+	    var navToggle = document.querySelector('.js-colorlib-nav-toggle');
+	    navToggle.addEventListener('click', function(event) {
+	        event.preventDefault();
+	        this.classList.toggle('active');
+	    });
+	});
 
 }());

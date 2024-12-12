@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Tag, Skill, Topic,About,Certificate,Contact
+from .models import Project, Tag, Skill, Topic,About,Certificate
 
 # Inline for Project Images
 # class ProjectImageInline(admin.TabularInline):
@@ -7,10 +7,10 @@ from .models import Project, Tag, Skill, Topic,About,Certificate,Contact
 #     extra = 1  # Number of empty forms to display
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('title', 'link', 'slug','image')  # Added slug for better visibility
+    list_display = ('title', 'link','image')  # Added slug for better visibility
     search_fields = ('title', 'description')
     list_filter = ('tags',)
-    prepopulated_fields = {'slug': ('title',)}  # Automatically populate slug from title
+    # prepopulated_fields = {'slug': ('title',)}  # Automatically populate slug from title
 
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name',)
@@ -39,4 +39,4 @@ admin.site.register(Skill, SkillAdmin)
 admin.site.register(Topic)
 admin.site.register(About, AboutAdmin)
 admin.site.register(Certificate)
-admin.site.register(Contact)
+# admin.site.register(Contact)

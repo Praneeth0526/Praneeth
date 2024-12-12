@@ -1,25 +1,22 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Project, Skill, Topic, About, Certificate,Contact
-# Create your views here.
+from django.shortcuts import render, redirect
+from .models import Project, Skill, Topic, About, Certificate,Tag
+# from .forms import ContactForm
 
 def home(request):
-    contacts = Contact.objects.all()
+    tags = Tag.objects.all()
     about = About.objects.all()
     projects = Project.objects.all()
     skills = Skill.objects.all()
     topics = Topic.objects.all()
     certificates = Certificate.objects.all().order_by('-date')
-    return render(request, 'main/index.html', {
+    context =  {
         'projects': projects,
         'skills': skills,
         'topics': topics,
         'about': about,
         'certificates': certificates,
-        'contacts': contacts,
-    })
+        'tags':tags
+    }
 
-# def contact(request):
-#     return render(request,'contact.html')
+    return render(request, 'main/index.html', context=context)
 
-# def project(request, id):
-#     return render(request,'project.html')
