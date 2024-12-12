@@ -63,7 +63,7 @@
 				{% for a in about %}
 				<div class="author-img" style="background-image: url('{{a.image.url}}');"></div>
 				{% endfor %}
-				<h1 id="colorlib-logo"><a href="index.html">Praneeth G</a></h1>
+				<h1 id="colorlib-logo"><a href="#">Praneeth G</a></h1>
 				<span class="position"><a href="#">Data Science and Engineering enthusiast</a></span>
 			</div>
 			<nav id="colorlib-main-menu" role="navigation" class="navbar">
@@ -93,53 +93,52 @@
 		</aside>
 
 		<div id="colorlib-main">
-    <section id="colorlib-hero" class="js-fullheight" data-section="home">
-        <div class="flexslider js-fullheight">
-            <ul class="slides">
-                <li style="background-image: url('{% static 'images/img_bg_2.jpg' %}');">
-                    <div class="overlay"></div>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-                                <div class="slider-text-inner js-fullheight">
-                                    {% for a in about %}
-                                    <div class="desc">
-                                        <h1>Hi! <br>I'm Praneeth</h1>
-                                        <h1>I am <br> an Aspiring Data Science Enthusiast </h1>
-                                        <p>
-                                            <a class="btn btn-primary btn-learn" href="{{ a.cv.url }}" download>Download CV <i class="icon-download4"></i></a>
-                                        </p>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </section>
+			<section id="colorlib-hero" class="js-fullheight" data-section="home">
+				<div class="flexslider js-fullheight">
+					<ul class="slides">
+						<li style="background-image: url('{% static 'images/img_bg_2.jpg' %}');">
+				   		<div class="overlay"></div>
+				   		<div class="container-fluid">
+				   			<div class="row">
+					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
+					   				<div class="slider-text-inner js-fullheight">
+										{% for a in about %}
+					   					<div class="desc">
+						   					<h1>Hi! <br>I'm Praneeth</h1>
+											   <h1>I am <br> an Aspiring Data Science Enthusiast </h1>
+                                        </h2>
+										
+												<p><a class="btn btn-primary btn-learn" href="{{a.cv.url}}">Download CV <i class="icon-download4"></i></a></p>
+											</div>
+					   				</div>
+									{% endfor %}
+					   			</div>
+					   		</div>
+				   		</div>
+				   	</li>
+				  	</ul>
+			  	</div>
+			</section>
 
-    <section class="colorlib-about" data-section="about">
-        <div class="colorlib-narrow-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
-                        <div class="col-md-12">
-                            <div class="about-desc">
-                                <span class="heading-meta">About Me</span>
-                                <h2 class="colorlib-heading animate-box">Who Am I?</h2>
-                                {% for a in about %}
-                                <p>{{ a.text }}</p>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
+			<section class="colorlib-about" data-section="about">
+				<div class="colorlib-narrow-content">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
+								<div class="col-md-12">
+									<div class="about-desc">
+										<span class="heading-meta">About Me</span>
+										<h2 class="colorlib-heading animate-box">Who Am I?</h2>
+							        {% for a in about %}
+										<p>{{a.text}}</p>
+									{% endfor %}
+							</div>
+							
+				
+						</div>
+					</div>
+				</div>
+			</section>
 
 			<section class="colorlib-skills" data-section="skills">
     <div class="colorlib-narrow-content">
@@ -179,6 +178,7 @@
         {% endfor %}
     </div>
 </section>
+
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 			<section class="colorlib-skills" data-section="certificate">
 				<div class="colorlib-narrow-content">
@@ -215,7 +215,24 @@
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
 							<span class="heading-meta">Education</span>
-							<h2 class="colorlib-heading animate-box">Education</h2>
+							<nav id="colorlib-main-menu" role="navigation" class="navbar navbar-expand-lg">
+								<div class="container">
+									<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+										<span class="hamburger-icon"></span>
+									</button>
+									<div id="navbar" class="collapse navbar-collapse">
+										<ul>
+											<li class="active"><a href="#" data-nav-section="home">Home</a></li>
+											<li><a href="#" data-nav-section="about">About</a></li>
+											<li><a href="#" data-nav-section="skills">Skills</a></li>
+											<li><a href="#" data-nav-section="certificate">Certificates</a></li>
+											<li><a href="#" data-nav-section="education">Education</a></li>
+											<li><a href="#" data-nav-section="work">Work</a></li>
+											<li><a href="#" data-nav-section="contact">Contact</a></li>
+										</ul>
+									</div>
+								</div>
+							</nav>	<h2 class="colorlib-heading animate-box">Education</h2>
 						</div>
 					</div>
 					<div class="row">
@@ -256,7 +273,9 @@
 												</ul>	
 									        </div>
 									    </div>
-									</div>		
+									</div>
+
+									
 								</div>
 							</div>
 						</div>
