@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from environ import Env
+import dj_database_url
 
 
 env = Env()
@@ -92,6 +93,9 @@ DATABASES = {
     }
 }
 
+DATABASES = {
+    'default': env.db('DATABASE_URL')
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

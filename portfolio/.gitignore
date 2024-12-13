@@ -1,0 +1,123 @@
+# Environment variables
+*.env
+
+# Virtual environment
+bin/
+lib/
+Include/
+Scripts/
+env/
+venv/
+
+# SQLite database
+*.sqlite3
+
+# Django stuff
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.tox/
+.nox/
+.cache/
+pytest_cache/
+.coverage
+coverage.xml
+*.cover
+.hypothesis/
+
+# Translations
+*.mo
+*.pot
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
