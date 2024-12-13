@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from cloudinary.models import CloudinaryField
 
 class Tag(models.Model):
     
@@ -16,9 +17,9 @@ class Project(models.Model):
    
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image',default='default.jpg')
     description = models.TextField(blank=True, null=True)
-    tags = models.ManyToManyField(Tag,blank=True, null=True)  # Store tags as a comma-separated list
+    tags = models.ManyToManyField(Tag,blank=True)  # Store tags as a comma-separated list
     link = models.URLField(max_length=200, blank=True)
 
     def __str__(self):
@@ -40,9 +41,16 @@ class Topic(models.Model):
 
 class About(models.Model):
     text = models.TextField()
-    image = models.ImageField(null=True)
-    cv = models.FileField(upload_to='cv/',null=True)
-
+    profile = CloudinaryField(
+        'image',
+        default='default.jpg',  # Specify your default image in Cloudinary
+        blank=True,  # Allow empty uploads
+    )
+    bg = CloudinaryField(
+        'image',
+        default='default.jpg',  # Specify your default image in Cloudinary
+        blank=True,  # Allow empty uploads
+    )
     def __str__(self):
         return self.text
 

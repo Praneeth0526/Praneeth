@@ -61,7 +61,7 @@
 		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
 			<div class="text-center">
 				{% for a in about %}
-				<div class="author-img" style="background-image: url('{{a.image.url}}');"></div>
+				<div class="author-img" style="background-image: url('{{a.profile.url}}');"></div>
 				{% endfor %}
 				<h1 id="colorlib-logo"><a href="#">Praneeth G</a></h1>
 				<span class="position"><a href="#">Data Science and Engineering enthusiast</a></span>
@@ -95,30 +95,33 @@
 
 		<div id="colorlib-main">
 			<section id="colorlib-hero" class="js-fullheight" data-section="home">
+				{% for a in about %}
 				<div class="flexslider js-fullheight">
 					<ul class="slides">
-						<li style="background-image: url('{% static 'images/img_bg_2.jpg' %}');">
+						<li style="background-image: url('{{a.bg.url}}');">
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
 				   			<div class="row">
 					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
 					   				<div class="slider-text-inner js-fullheight">
-										{% for a in about %}
+										
 					   					<div class="desc">
 						   					<h1>Hi! <br>I'm Praneeth</h1>
 											   <h1>I am <br> an Aspiring Data Science Enthusiast </h1>
                                         </h2>
-										
-												<p><a class="btn btn-primary btn-learn" href="{{a.cv.url}}">Download CV <i class="icon-download4"></i></a></p>
+												<p>
+													<a class="btn btn-primary btn-learn" href="{% static 'images/cv/My_Resume.pdf' %}" target="_blank" download>
+														Download CV <i class="icon-download4"></i>
+													</a></p>
 											</div>
 					   				</div>
-									{% endfor %}
 					   			</div>
 					   		</div>
 				   		</div>
 				   	</li>
 				  	</ul>
 			  	</div>
+				{% endfor %}
 			</section>
 
 			<section class="colorlib-about" data-section="about">
@@ -274,6 +277,7 @@
 			
 
 
+
 			<section class="colorlib-work" data-section="work">
 				<div class="colorlib-narrow-content">
 					<div class="row">
@@ -291,8 +295,8 @@
 										<h3><a href="{{ project.link }}">{{ project.title }}</a></h3>
 										<span style="font-size: 16px;">{{ project.description }}</span>
 										<div class="tags-container">
-											{% for tag in project.get_tags %}
-												<span class="badge badge-primary">{{ tag }}</span>
+											{% for tag in tags.all %}
+												<span class="badge badge-primary">{{ tag.name }}</span>
 											{% endfor %}
 										</div>
 									</div>

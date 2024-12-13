@@ -27,7 +27,7 @@ class SkillAdmin(admin.ModelAdmin):
     inlines = [TopicInline]
 
 class AboutAdmin(admin.ModelAdmin):
-    list_display = ('text', 'image', 'cv')
+    list_display = ('text', 'profile','bg')
     search_fields = ('text',)
 
 

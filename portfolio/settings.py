@@ -14,6 +14,11 @@ from pathlib import Path
 import os
 from environ import Env
 import dj_database_url
+import cloudinary
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from .env
+
 
 
 env = Env()
@@ -21,6 +26,11 @@ Env.read_env()
 ENVIRONMENT = env('ENVIRONMENT', default='development')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+#Cloudinary imports
+import cloudinary.uploader
+import cloudinary.api
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -49,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "main.apps.MainConfig",
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -133,12 +144,19 @@ USE_TZ = True
 
 
 STATIC_URL = 'main/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'main/staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main/static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'main/static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main/staticfiles')]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'main/static/images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main/staticfiles/images')
+
+
+cloudinary.config(
+    cloud_name=os.getenv('CLOUD_NAME'),
+    api_key=os.getenv('API_KEY'),
+    api_secret=os.getenv('API_SECRET')
+)
