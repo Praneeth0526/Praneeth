@@ -97,12 +97,12 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 DATABASES = {
     'default': env.db('DATABASE_URL')
@@ -160,3 +160,8 @@ cloudinary.config(
     api_key=os.getenv('API_KEY'),
     api_secret=os.getenv('API_SECRET')
 )
+
+# Supabase Configuration
+SUPABASE_URL = env("SUPABASE_URL")
+SUPABASE_KEY = env("SUPABASE_KEY")
+SUPABASE_BUCKET = 'staticfile/resume/'

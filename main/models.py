@@ -1,6 +1,11 @@
+import os
 from django.db import models
+from django.conf import settings
 import uuid
 from cloudinary.models import CloudinaryField
+from supabase import create_client
+client = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
+
 
 class Tag(models.Model):
     
@@ -41,18 +46,41 @@ class Topic(models.Model):
 
 class About(models.Model):
     text = models.TextField()
-    profile = CloudinaryField(
-        'image',
-        default='default.jpg',  # Specify your default image in Cloudinary
-        blank=True,  # Allow empty uploads
-    )
-    bg = CloudinaryField(
-        'image',
-        default='default.jpg',  # Specify your default image in Cloudinary
-        blank=True,  # Allow empty uploads
-    )
+    profile = CloudinaryField('image', default='default.jpg', blank=True)
+    bg = CloudinaryField('image', default='default.jpg', blank=True)
+    resume = models.FileField(upload_to='resume/', blank=True, null=True)
+    
     def __str__(self):
         return self.text
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        
+        # Upload to Supabase if resume exists
+        if self.resume:
+           
+            file_name = os.path.basename(self.resume.name)
+            
+            with open(self.resume.path, 'rb') as f:
+                client.storage.from_('staticfiles').upload(
+                    f"resume/{file_name}", 
+                    f.read(),
+                    {'content-type': 'application/pdf'}
+                )
+    
+    @property
+    def signed_resume_url(self):
+        if not self.resume:
+            return None
+        
+        file_name = os.path.basename(self.resume.name)
+        
+        result = client.storage.from_('staticfiles').create_signed_url(
+            f"resume/{file_name}", 
+            3600 # 1 hour
+        )
+        
+        return result['signedURL']
 
 class Certificate(models.Model):
     title = models.CharField(max_length=100)

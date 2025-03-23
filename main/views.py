@@ -19,4 +19,3 @@ def home(request):
     }
 
     return render(request, 'main/index.html', context=context)
-

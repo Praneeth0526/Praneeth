@@ -1,21 +1,23 @@
+
 from django.contrib import admin
-from .models import Project, Skill, Topic,About,Certificate,Tag
+from .models import Project, Skill, Topic, About, Certificate, Tag
 
-# Inline for Project Images
-# class ProjectImageInline(admin.TabularInline):
-#     model = ProjectImage
-#     extra = 1  # Number of empty forms to display
 
+class AboutAdmin(admin.ModelAdmin):
+    list_display = ('text', 'has_resume')
+    
+    def has_resume(self, obj):
+        return bool(obj.resume)
+    has_resume.boolean = True
+ 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('id','title', 'link','image')  # Added slug for better visibility
+    list_display = ('id', 'title', 'link', 'image')
     search_fields = ('title', 'description')
     list_filter = ('tags',)
-    # prepopulated_fields = {'slug': ('title',)}  # Automatically populate slug from title
 
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
-
 
 class TopicInline(admin.TabularInline):
     model = Topic
@@ -26,17 +28,10 @@ class SkillAdmin(admin.ModelAdmin):
     search_fields = ('topic',)
     inlines = [TopicInline]
 
-class AboutAdmin(admin.ModelAdmin):
-    list_display = ('text', 'profile','bg')
-    search_fields = ('text',)
-
-
-
-# Register models with the admin site
+# Register Models in Admin Panel
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Topic)
 admin.site.register(About, AboutAdmin)
 admin.site.register(Certificate)
-# admin.site.register(Contact)
