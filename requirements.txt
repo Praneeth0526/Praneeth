@@ -1,14 +1,17 @@
-asgiref==3.8.1
-certifi==2024.8.30
-cloudinary==1.41.0
-dj-database-url==2.3.0
+# Essential dependencies
 Django==5.1.3
 django-environ==0.11.2
-pillow==11.0.0
-psycopg2-binary==2.9.10
-python-dotenv==1.0.1
-six==1.17.0
-sqlparse==0.5.2
-typing_extensions==4.12.2
-urllib3==2.2.3
-whitenoise==6.8.2
+dj-database-url==2.3.0
+supabase==2.14.0
+psycopg2-binary==2.9.10  # PostgreSQL adapter
+python-dotenv==1.0.1  # For managing environment variables
+whitenoise==6.8.2  # For serving static files on production
+sqlparse==0.5.2  # Required by Django for parsing SQL
+
+# Optional dependencies
+pillow==11.0.0  # Required if dealing with image uploads
+cloudinary==1.41.0  # If using Cloudinary for image storage
+
+# For making async HTTP requests (if used explicitly in your project)
+httpx==0.28.1
+aiosignal==1.3.2
