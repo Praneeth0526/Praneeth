@@ -1491,3 +1491,22 @@ body.offcanvas {
   color: black; /* Change text color to black */
 }
 
+.certificate-item {
+    margin-bottom: 15px;
+    font-family: 'Quicksand', sans-serif; /* Match the global font */
+    font-size: 16px;
+    color: #333; /* Adjust color to match the website's theme */
+}
+
+.certificate-item .course-name {
+    font-weight: bold;
+    font-size: 18px; /* Adjust size to match headings */
+    margin-bottom: 5px;
+}
+
+.certificate-item .issued-date {
+    font-size: 14px;
+    color: #666; /* Subtle color for issued date */
+    margin-bottom: 10px;
+}
+

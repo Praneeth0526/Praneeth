@@ -46,41 +46,92 @@ class Topic(models.Model):
 
 class About(models.Model):
     text = models.TextField()
-    profile = CloudinaryField('image', default='default.jpg', blank=True)
-    bg = CloudinaryField('image', default='default.jpg', blank=True)
+    bg = models.ImageField(upload_to='images/', blank=True, null=True)
+    profile = models.ImageField(upload_to='images/', blank=True, null=True)
     resume = models.FileField(upload_to='resume/', blank=True, null=True)
-    
+
     def __str__(self):
         return self.text
-    
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        
-        # Upload to Supabase if resume exists
-        if self.resume:
-           
+
+        # Upload resume to Supabase if it exists
+        if self.resume and os.path.exists(self.resume.path):
             file_name = os.path.basename(self.resume.name)
-            
             with open(self.resume.path, 'rb') as f:
                 client.storage.from_('staticfiles').upload(
-                    f"resume/{file_name}", 
+                    f"resume/{file_name}",
                     f.read(),
                     {'content-type': 'application/pdf'}
                 )
-    
+
+        # Upload bg image to Supabase if it exists
+        if self.bg and os.path.exists(self.bg.path):
+            file_name = os.path.basename(self.bg.name)
+            with open(self.bg.path, 'rb') as f:
+                content_type = 'image/jpeg' if file_name.lower().endswith(('.jpg', '.jpeg')) else 'image/png'
+                client.storage.from_('staticfiles').upload(
+                    f"images/{file_name}",
+                    f.read(),
+                    {'content-type': content_type}
+                )
+
+        # Upload profile image to Supabase if it exists
+        if self.profile and os.path.exists(self.profile.path):
+            file_name = os.path.basename(self.profile.name)
+            with open(self.profile.path, 'rb') as f:
+                content_type = 'image/jpeg' if file_name.lower().endswith(('.jpg', '.jpeg')) else 'image/png'
+                client.storage.from_('staticfiles').upload(
+                    f"images/{file_name}",
+                    f.read(),
+                    {'content-type': content_type}
+                )
+
     @property
     def signed_resume_url(self):
         if not self.resume:
             return None
-        
         file_name = os.path.basename(self.resume.name)
-        
-        result = client.storage.from_('staticfiles').create_signed_url(
-            f"resume/{file_name}", 
-            3600 # 1 hour
-        )
-        
-        return result['signedURL']
+        try:
+            result = client.storage.from_('staticfiles').create_signed_url(
+                f"resume/{file_name}",
+                3600  # 1 hour
+            )
+            return result['signedURL']
+        except Exception as e:
+            print(f"Error generating signed URL for resume: {e}")
+            return None
+
+    @property
+    def signed_profile_url(self):
+        if not self.profile:
+            return None
+        file_name = os.path.basename(self.profile.name)
+        try:
+            result = client.storage.from_('staticfiles').create_signed_url(
+                f"images/{file_name}",
+                3600
+            )
+            return result['signedURL']
+        except Exception as e:
+            print(f"Error generating signed URL for profile: {e}")
+            return None
+
+    @property
+    def signed_bg_url(self):
+        if not self.bg:
+            return None
+        file_name = os.path.basename(self.bg.name)
+        try:
+            result = client.storage.from_('staticfiles').create_signed_url(
+                f"images/{file_name}",
+                3600
+            )
+            return result['signedURL']
+        except Exception as e:
+            print(f"Error generating signed URL for bg: {e}")
+            return None
 
 class Certificate(models.Model):
     title = models.CharField(max_length=100)

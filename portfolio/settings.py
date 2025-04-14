@@ -142,7 +142,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-
 STATIC_URL = 'main/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'main/static')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main/staticfiles')]
@@ -151,8 +150,12 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main/staticfiles')]
 
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'main/staticfiles/images')
+# Media files configuration for Supabase
+MEDIA_URL = '/media/'  # URL for accessing media files
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'main/staticfiles')
+
+# Remove or comment out local media root if it exists
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'main/staticfiles')
 
 
 cloudinary.config(
@@ -164,4 +167,4 @@ cloudinary.config(
 # Supabase Configuration
 SUPABASE_URL = env("SUPABASE_URL")
 SUPABASE_KEY = env("SUPABASE_KEY")
-SUPABASE_BUCKET = 'staticfile/resume/'
+SUPABASE_BUCKET = 'staticfile'

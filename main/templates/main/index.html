@@ -66,7 +66,9 @@
 			<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
 			<div class="text-center">
 				{% for a in about %}
-				<div class="author-img" style="background-image: url('{{a.profile.url}}');"></div>
+				{% if a.profile %}
+				<div class="author-img" style="background-image: url('{{ a.signed_profile_url }}');"></div>
+				{% endif %}
 				{% endfor %}
 				<h1 id="colorlib-logo"><a href="#">Praneeth G</a></h1>
 				<span class="position"><a href="#">Data Science and Engineering enthusiast</a></span>
@@ -103,7 +105,9 @@
 				{% for a in about %}
 				<div class="flexslider js-fullheight">
 					<ul class="slides">
-						<li style="background-image: url('{{a.bg.url}}');">
+						{% if a.bg %}
+						<li style="background-image: url('{{ a.signed_bg_url }}');">
+						{% endif %}
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
 				   			<div class="row">
@@ -144,8 +148,8 @@
 									<div class="about-desc">
 										<span class="heading-meta">About Me</span>
 										<h2 class="colorlib-heading animate-box">Who Am I?</h2>
-							        {% for a in about %}
-										<p>{{a.text}}</p>
+									{% for a in about %}
+										<p style="font-size: 18px;">{{a.text}}</p>
 									{% endfor %}
 							</div>
 							
@@ -250,7 +254,8 @@
     </div>
 </section> -->
 
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 			<section class="colorlib-skills" data-section="certificate">
 				<div class="colorlib-narrow-content">
 					<div class="row">
@@ -285,6 +290,7 @@
 					</div>
 				</div>
 			</section>
+			
 			
 
 

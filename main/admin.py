@@ -4,7 +4,7 @@ from .models import Project, Skill, Topic, About, Certificate, Tag
 
 
 class AboutAdmin(admin.ModelAdmin):
-    list_display = ('text', 'has_resume')
+    list_display = ('text', 'profile','bg', 'has_resume')
     
     def has_resume(self, obj):
         return bool(obj.resume)
