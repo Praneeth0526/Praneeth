@@ -78,11 +78,11 @@
 					<ul>
 						<li class="active"><a href="#" data-nav-section="home">Home</a></li>
 						<li><a href="#" data-nav-section="about">About</a></li>
-						<li><a href="#" data-nav-section="education">Education</a></li>
+						<li><a href="#" data-nav-section="work">Work</a></li>
+						
 						<!-- <li><a href="#" data-nav-section="skills">Skills</a></li> -->
 						<li><a href="#" data-nav-section="certificate">Certificates</a></li>
 						
-						<li><a href="#" data-nav-section="work">Work</a></li>
 						<li><a href="#" data-nav-section="contact">Contact</a></li>
 					</ul>
 				</div>
@@ -94,7 +94,7 @@
 					<li><a href="https://github.com/Praneeth0526"><i class="fab fa-github"></i></a></li>
 					<li><a href="https://www.linkedin.com/in/praneeth-g-804372282"><i class="fab fa-linkedin"></i></a></li>
 					<li><a href="https://www.kaggle.com/praneeth26"><i class="fab fa-kaggle"></i></a></li>
-					<li><a href="https://www.instagram.com/ph0_.8/"><i class="fab fa-instagram"></i></a></li>
+<!-- 					<li><a href="https://fossunited.org/u/praneeth"><i class="fab fa-instagram"></i></a></li> -->
 				</ul>
 			</div>
 
@@ -157,62 +157,45 @@
 					</div>
 				</div>
 			</section>
-
-			<section class="colorlib-education" data-section="education">
+			
+			<section class="colorlib-work" data-section="work">
 				<div class="colorlib-narrow-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Education</span>
-							<h2 class="colorlib-heading animate-box">Education</h2>
+							<span class="heading-meta">Works</span>
+							<h2 class="colorlib-heading animate-box">Projects</h2>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-							<div class="fancy-collapse-panel">
-								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-			
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="headingTwo">
-									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Bachelor Degree
-									            </a>
-									        </h4>
-									    </div>
-									    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-									        <div class="panel-body">
-									            <p>B.E in Computer Science,<strong>Vidyavardhaka College of Engineering</strong>,Mysuru, Karnataka.</p>
-													<ul>
-														<li>Duration 2023-2027</li>
-														
-													</ul>
-									        </div>
-									    </div>
+						{% for project in projects %}
+						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+							<div class="project" style="background-image: url('{{ project.image.url }}');">
+								<div class="desc">
+									<div class="con">
+										<h3><a href="{{ project.link }}">{{ project.title }}</a></h3>
+										<span style="font-size: 16px;">{{ project.description }}</span>
+										<div class="tags-container">
+											{% for tag in project.tags.all %}
+												<span class="badge badge-primary">{{ tag.name }}</span>
+											{% endfor %}
+										</div>
 									</div>
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="headingThree">
-									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Pre-University Education
-									            </a>
-									        </h4>
-									    </div>
-									    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-									        <div class="panel-body">
-									            <p>P.U.C at <strong>Gopal Swamy PU College(Sankalpa)</strong>, Mysuru, Karnataka.</p>
-												<ul>
-													<li>Duration 2021-2023</li>
-													
-												</ul>	
-									        </div>
-									    </div>
-									</div>
-
-									
 								</div>
 							</div>
 						</div>
+						{% if forloop.counter|divisibleby:2 and not forloop.last %}
+					</div>
+					<div class="row">
+						{% endif %}
+						{% endfor %}
+						{% if not projects %}
+							<h3>No projects found</h3>
+						{% endif %}
 					</div>
 				</div>
 			</section>
+
+			
 
 <!-- <section class="colorlib-skills" data-section="skills">
     <div class="colorlib-narrow-content">
@@ -289,47 +272,66 @@
 					</div>
 				</div>
 			</section>
-			
-			
-
-
-
-			<section class="colorlib-work" data-section="work">
+			<section class="colorlib-education" data-section="education">
 				<div class="colorlib-narrow-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Works</span>
-							<h2 class="colorlib-heading animate-box">Projects</h2>
+							<span class="heading-meta">Education</span>
+							<h2 class="colorlib-heading animate-box">Education</h2>
 						</div>
 					</div>
 					<div class="row">
-						{% for project in projects %}
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url('{{ project.image.url }}');">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="{{ project.link }}">{{ project.title }}</a></h3>
-										<span style="font-size: 16px;">{{ project.description }}</span>
-										<div class="tags-container">
-											{% for tag in project.tags.all %}
-												<span class="badge badge-primary">{{ tag.name }}</span>
-											{% endfor %}
-										</div>
+						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+							<div class="fancy-collapse-panel">
+								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			
+									<div class="panel panel-default">
+									    <div class="panel-heading" role="tab" id="headingTwo">
+									        <h4 class="panel-title">
+									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Bachelor Degree
+									            </a>
+									        </h4>
+									    </div>
+									    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+									        <div class="panel-body">
+									            <p>B.E in Computer Science,<strong>Vidyavardhaka College of Engineering</strong>,Mysuru, Karnataka.</p>
+													<ul>
+														<li>Duration 2023-2027</li>
+														
+													</ul>
+									        </div>
+									    </div>
 									</div>
+									<div class="panel panel-default">
+									    <div class="panel-heading" role="tab" id="headingThree">
+									        <h4 class="panel-title">
+									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Pre-University Education
+									            </a>
+									        </h4>
+									    </div>
+									    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+									        <div class="panel-body">
+									            <p>P.U.C at <strong>Gopal Swamy PU College(Sankalpa)</strong>, Mysuru, Karnataka.</p>
+												<ul>
+													<li>Duration 2021-2023</li>
+													
+												</ul>	
+									        </div>
+									    </div>
+									</div>
+
+									
 								</div>
 							</div>
 						</div>
-						{% if forloop.counter|divisibleby:2 and not forloop.last %}
-					</div>
-					<div class="row">
-						{% endif %}
-						{% endfor %}
-						{% if not projects %}
-							<h3>No projects found</h3>
-						{% endif %}
 					</div>
 				</div>
 			</section>
+			
+			
+
+
+
 
 			
 			<section class="colorlib-contact" data-section="contact">
@@ -374,14 +376,14 @@
                         <p><a>Kaggle</a></p>
                     </div>
                 </div>
-                <div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
+<!--                 <div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
                     <div class="colorlib-icon">
                         <a href="https://www.instagram.com/ph0_.8/" target="_blank"><i class="fab fa-instagram"></i></a>
                     </div>
                     <div class="colorlib-text">
                         <p><a>Instagram</a></p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
