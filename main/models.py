@@ -56,37 +56,37 @@ class About(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        # Upload resume to Supabase if it exists
-        if self.resume and os.path.exists(self.resume.path):
-            file_name = os.path.basename(self.resume.name)
-            with open(self.resume.path, 'rb') as f:
-                client.storage.from_('staticfiles').upload(
-                    f"resume/{file_name}",
-                    f.read(),
-                    {'content-type': 'application/pdf'}
-                )
+        # # Upload resume to Supabase if it exists
+        # if self.resume and os.path.exists(self.resume.path):
+        #     file_name = os.path.basename(self.resume.name)
+        #     with open(self.resume.path, 'rb') as f:
+        #         client.storage.from_('staticfiles').upload(
+        #             f"resume/{file_name}",
+        #             f.read(),
+        #             {'content-type': 'application/pdf'}
+        #         )
 
-        # Upload bg image to Supabase if it exists
-        if self.bg and os.path.exists(self.bg.path):
-            file_name = os.path.basename(self.bg.name)
-            with open(self.bg.path, 'rb') as f:
-                content_type = 'image/jpeg' if file_name.lower().endswith(('.jpg', '.jpeg')) else 'image/png'
-                client.storage.from_('staticfiles').upload(
-                    f"images/{file_name}",
-                    f.read(),
-                    {'content-type': content_type}
-                )
+        # # Upload bg image to Supabase if it exists
+        # if self.bg and os.path.exists(self.bg.path):
+        #     file_name = os.path.basename(self.bg.name)
+        #     with open(self.bg.path, 'rb') as f:
+        #         content_type = 'image/jpeg' if file_name.lower().endswith(('.jpg', '.jpeg')) else 'image/png'
+        #         client.storage.from_('staticfiles').upload(
+        #             f"images/{file_name}",
+        #             f.read(),
+        #             {'content-type': content_type}
+        #         )
 
-        # Upload profile image to Supabase if it exists
-        if self.profile and os.path.exists(self.profile.path):
-            file_name = os.path.basename(self.profile.name)
-            with open(self.profile.path, 'rb') as f:
-                content_type = 'image/jpeg' if file_name.lower().endswith(('.jpg', '.jpeg')) else 'image/png'
-                client.storage.from_('staticfiles').upload(
-                    f"images/{file_name}",
-                    f.read(),
-                    {'content-type': content_type}
-                )
+        # # Upload profile image to Supabase if it exists
+        # if self.profile and os.path.exists(self.profile.path):
+        #     file_name = os.path.basename(self.profile.name)
+        #     with open(self.profile.path, 'rb') as f:
+        #         content_type = 'image/jpeg' if file_name.lower().endswith(('.jpg', '.jpeg')) else 'image/png'
+        #         client.storage.from_('staticfiles').upload(
+        #             f"images/{file_name}",
+        #             f.read(),
+        #             {'content-type': content_type}
+        #         )
 
     @property
     def signed_resume_url(self):

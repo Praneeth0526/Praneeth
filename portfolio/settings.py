@@ -16,6 +16,7 @@ from environ import Env
 import dj_database_url
 import cloudinary
 from dotenv import load_dotenv
+from decouple import config
 
 load_dotenv()  # Load environment variables from .env
 
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "main.apps.MainConfig",
     'cloudinary',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -164,7 +166,35 @@ cloudinary.config(
     api_secret=os.getenv('API_SECRET')
 )
 
+
+# Load from .env
+SUPABASE_S3_ACCESS_KEY = config('SUPABASE_S3_ACCESS_KEY')
+SUPABASE_S3_SECRET_KEY = config('SUPABASE_S3_SECRET_KEY')
+SUPABASE_S3_REGION_NAME = config('SUPABASE_S3_REGION_NAME')
+SUPABASE_S3_ENDPOINT_URL = config('SUPABASE_S3_ENDPOINT_URL')
 # Supabase Configuration
 SUPABASE_URL = env("SUPABASE_URL")
 SUPABASE_KEY = env("SUPABASE_KEY")
-SUPABASE_BUCKET = 'staticfile'
+SUPABASE_BUCKET = 'staticfiles'
+
+# Additional S3-compatible settings for Supabase
+SUPABASE_S3_ENDPOINT = f"{SUPABASE_URL}/storage/v1/s3"
+SUPABASE_S3_ACCESS_KEY = env("SUPABASE_S3_ACCESS_KEY")  # From Supabase dashboard
+SUPABASE_S3_SECRET_KEY = env("SUPABASE_S3_SECRET_KEY")  # From Supabase dashboard
+
+# Django Storage Configuration (Django 5.x style)
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "OPTIONS": {
+            "access_key": SUPABASE_S3_ACCESS_KEY,
+            "secret_key": SUPABASE_S3_SECRET_KEY,
+            "bucket_name": SUPABASE_BUCKET,
+            "endpoint_url": SUPABASE_S3_ENDPOINT,
+            "region_name": "us-east-1",  # Supabase default
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}

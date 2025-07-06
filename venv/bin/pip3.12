@@ -1,4 +1,4 @@
-#!/home/praneeth05/VSCode/Portfolio/venv/bin/python
+#!/home/praneeth/VSCode/Portfolio/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
