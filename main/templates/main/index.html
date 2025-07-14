@@ -185,6 +185,11 @@
 			<div class="interstellar-particle particle-15"></div>
 		</div>
 		
+		<!-- Dynamic Glyph Matrix for Desktop Left Section -->
+		<div class="glyph-matrix-container">
+			<canvas id="glyphMatrix" class="glyph-matrix-canvas"></canvas>
+		</div>
+		
 	<div id="colorlib-page">
 		<div class="container-wrap">
 		
@@ -651,6 +656,104 @@ document.addEventListener('DOMContentLoaded', function() {
 			}, 1000);
 		});
 	}
+});
+
+// Dynamic Glyph Matrix Animation
+document.addEventListener('DOMContentLoaded', function() {
+	// Only run on desktop screens
+	if (window.innerWidth <= 1200) return;
+	
+	const canvas = document.getElementById('glyphMatrix');
+	if (!canvas) return;
+	
+	const ctx = canvas.getContext('2d');
+	
+	// Set canvas dimensions
+	function resizeCanvas() {
+		canvas.width = canvas.offsetWidth;
+		canvas.height = canvas.offsetHeight;
+	}
+	resizeCanvas();
+	
+	// Matrix characters - mix of tech symbols, Greek letters, CJK characters, and Indic scripts
+	const chars = '01αβγδεζηθικλμνξοπρστυφχψωΩΦΨΔΛΠΣ{}[]<>()+=*&%$#@!?/\\|~^`ℝℂℤℕ∞∑∏∫∇∂∆∧∨∪∩⊆⊇⊂⊃∅∈∉∀∃¬⟷⟹⟸↔↑↓←→↖↗↙↘⌐¬¤¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷' +
+	             // Chinese characters (Hanzi) - common tech and philosophy related
+	             '一二三四五六七八九十百千万亿数字代码程序算法智能机器学习人工神经网络数据系统计算云端编程开发技术科学未来创新变革数码电子信息通讯' +
+	             // Japanese characters (Hiragana, Katakana, Kanji)
+	             'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン技術開発情報処理' +
+	             // Korean characters (Hangul) - Consonants and Vowels
+	             'ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣ가나다라마바사아자차카타파하거너더러머버서어저처커터퍼허고노도로모보소오조초코토포호구누두루무부수우주추쿠투푸후기니디리미비시이지치키티피히' +
+	             // Kannada script (ಕನ್ನಡ) - vowels, consonants, and common combinations
+	             'ಅಆಇಈಉಊಋಎಏಐಒಓಔಕಖಗಘಙಚಛಜಝಞಟಠಡಢಣತಥದಧನಪಫಬಭಮಯರಲವಶಷಸಹಳೞಕಾಕಿಕೀಕುಕೂಕೃಕೆಕೇಕೈಕೊಕೋಕೌಕಂಕಃಗ್ಞಾನತಂತ್ರಯುಗಸಮಯಕಾರ್ಯಕ್ರಮ';
+	
+	const fontSize = 14;
+	const columns = Math.floor(canvas.width / fontSize);
+	const drops = Array(columns).fill(0);
+	
+	function draw() {
+		// Semi-transparent background for trail effect
+		ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		// Get current section to adjust color
+		const activeSection = document.querySelector('.page-section.visible') || 
+		                     document.querySelector('#home-section');
+		const sectionName = activeSection ? activeSection.id.replace('-section', '') : 'home';
+		
+		// Dynamic colors based on section
+		let glyphColor;
+		switch(sectionName) {
+			case 'home':
+				glyphColor = 'rgba(100, 255, 218, 0.8)'; // Neon cyan
+				break;
+			case 'about':
+				glyphColor = 'rgba(138, 43, 226, 0.8)'; // Purple
+				break;
+			case 'work':
+				glyphColor = 'rgba(255, 20, 147, 0.8)'; // Deep pink
+				break;
+			case 'certificate':
+				glyphColor = 'rgba(255, 165, 0, 0.8)'; // Orange
+				break;
+			case 'contact':
+				glyphColor = 'rgba(50, 205, 50, 0.8)'; // Lime green
+				break;
+			default:
+				glyphColor = 'rgba(100, 255, 218, 0.8)';
+		}
+		
+		ctx.fillStyle = glyphColor;
+		ctx.font = `${fontSize}px 'Courier New', monospace`;
+		
+		for (let i = 0; i < drops.length; i++) {
+			const char = chars[Math.floor(Math.random() * chars.length)];
+			const x = i * fontSize;
+			const y = drops[i] * fontSize;
+			
+			ctx.fillText(char, x, y);
+			
+			// Reset drop randomly or when it goes off screen
+			if (y > canvas.height && Math.random() > 0.975) {
+				drops[i] = 0;
+			}
+			drops[i]++;
+		}
+	}
+	
+	// Animation loop
+	setInterval(draw, 100);
+	
+	// Handle window resize
+	window.addEventListener('resize', function() {
+		if (window.innerWidth <= 1200) {
+			canvas.style.display = 'none';
+			return;
+		}
+		canvas.style.display = 'block';
+		resizeCanvas();
+		drops.length = Math.floor(canvas.width / fontSize);
+		drops.fill(0);
+	});
 });
 </script>
 	</body>
