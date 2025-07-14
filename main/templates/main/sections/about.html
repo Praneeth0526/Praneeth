@@ -1,0 +1,139 @@
+{% load static %}
+
+<div id="about-section" class="full-viewport-section" data-section="about">
+	<div class="content-wrapper">
+		<!-- Section Header -->
+		<div class="section-header animate-on-scroll">
+			<span class="section-meta">About Me</span>
+			<h2 class="section-title">Who Am I?</h2>
+		</div>
+		
+		<!-- About Grid Layout -->
+		<div class="about-grid">
+			<!-- About Introduction -->
+			<div class="about-intro-section animate-on-scroll">
+				{% for a in about %}
+				<div class="about-intro modern-card">
+					<p>{{ a.text }}</p>
+				</div>
+				{% endfor %}
+			</div>
+
+			<!-- Education Section -->
+			<div class="about-education-section animate-on-scroll">
+				<div class="about-education modern-card">
+					<h3>
+						<i class="fas fa-graduation-cap dynamic-icon"></i>
+						Education
+					</h3>
+					<div class="education-item">
+						<div class="education-degree">B.E in Computer Science & Engineering</div>
+						<div class="education-institution">VVCE (2023-2027)</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Experience Section with LinkedIn Timeline -->
+			<div class="experience-section-container animate-on-scroll">
+				<div class="experience-section modern-card">
+					<h3>
+						<i class="fas fa-briefcase dynamic-icon"></i>
+						Professional Experience
+					</h3>
+					<div class="linkedin-timeline">
+						<!-- Experience Items -->
+						<div class="timeline-item">
+							<div class="timeline-line"></div>
+							<div class="timeline-dot active"></div>
+							<div class="timeline-content">
+								<div class="experience-header">
+									<div class="company-info">
+										<img src="{% static 'images/app_icon.png' %}" alt="Bloombuz" class="company-logo-timeline">
+										<div class="experience-details">
+											<div class="experience-role">Project Intern</div>
+											<div class="experience-company">Bloombuz</div>
+											<div class="experience-duration">2024 - Present</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="timeline-item">
+							<div class="timeline-line"></div>
+							<div class="timeline-dot"></div>
+							<div class="timeline-content">
+								<div class="experience-header">
+									<div class="company-info">
+										<div class="company-logo-timeline freelancer">
+											<i class="fas fa-user-tie"></i>
+										</div>
+										<div class="experience-details">
+											<div class="experience-role">Freelancer</div>
+											<div class="experience-company">Independent Developer</div>
+											<div class="experience-duration">2023 - Present</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Skills Section -->
+			<div class="skills-section-container animate-on-scroll">
+				<div class="skills-section modern-card">
+					<h3>
+						<i class="fas fa-code dynamic-icon"></i>
+						Worked on
+					</h3>
+					<!-- Tech Icon Carousel -->
+					<div class="skills-carousel">
+						<div id="tech-icon" class="tech-card">
+							<i class="fab fa-python"></i>
+							<span>Python</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Call to Action -->
+			<div class="about-cta-section animate-on-scroll">
+				<div class="about-cta modern-card">
+					<div class="cta-content">
+						<h3 class="text-gradient">Let's Build Something Amazing</h3>
+						<div class="cta-buttons">
+							<a href="#work-section" data-nav-section="work" class="modern-btn primary">
+								<i class="fas fa-eye"></i>
+								<span>View My Work</span>
+							</a>
+							<a href="#contact-section" data-nav-section="contact" class="modern-btn secondary">
+								<i class="fas fa-envelope"></i>
+								<span>Get In Touch</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+const techs = [
+	{ icon: 'fab fa-python', label: 'Python' },
+	{ icon: 'fas fa-microchip', label: 'IoT Boards' },
+	{ icon: 'fas fa-chart-line', label: 'Data Analytics' },
+	{ icon: 'fas fa-robot', label: 'AI' },
+	{ icon: 'fab fa-android', label: 'Android Dev' },
+	{ icon: 'fab fa-ubuntu', label: 'Linux' }
+];
+let idx = 0;
+function showTech() {
+	const techIcon = document.getElementById('tech-icon');
+	techIcon.innerHTML = `<i class="${techs[idx].icon}"></i><span>${techs[idx].label}</span>`;
+	idx = (idx + 1) % techs.length;
+}
+setInterval(showTech, 5000);
+</script>

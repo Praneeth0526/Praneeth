@@ -1,0 +1,34 @@
+{% load static %}
+
+<div class="full-viewport-section dynamic-container">
+	<div class="section-header">
+		<span class="section-meta">Achievements</span>
+		<h2 class="section-title">Certificates & Awards</h2>
+		<p class="section-description">
+			Professional certifications and recognitions that validate my expertise
+		</p>
+	</div>
+	
+	<div class="content-wrapper certificates-wrapper">
+		<div class="certificates-container dynamic-inner-box">
+			<div class="certificates-grid-2col" id="certificates-container">
+				{% for certificate in certificates %}
+				<div class="certificate-card">
+					<h3 class="certificate-title">{{ certificate.title }}</h3>
+					<p class="certificate-date">
+						Issued on: {{ certificate.date|date:"M d, Y" }}
+					</p>
+					<a href="{{ certificate.link }}" target="_blank" rel="noopener noreferrer" class="modern-btn certificate-btn">
+						View Credential
+					</a>
+				</div>
+				{% endfor %}
+				{% if not certificates %}
+				<div class="no-certificates">
+					<p>No certificates available at the moment.</p>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>

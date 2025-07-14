@@ -1,0 +1,34 @@
+<div class="modal-header">
+	<h5 class="modal-title">{{ project.title }}</h5>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	{% if project.image %}
+	<img src="{{ project.image.url }}" class="img-responsive" style="width: 100%; margin-bottom: 20px; border-radius: 10px;">
+	{% endif %}
+	
+	<p><strong>Description:</strong></p>
+	<p>{{ project.description }}</p>
+	
+	{% if project.tags.all %}
+	<p><strong>Technologies:</strong></p>
+	<div class="tags-container">
+		{% for tag in project.tags.all %}
+			<span class="badge badge-primary" style="margin: 2px;">{{ tag.name }}</span>
+		{% endfor %}
+	</div>
+	{% endif %}
+	
+	{% if project.link %}
+	<div style="margin-top: 20px;">
+		<a href="{{ project.link }}" target="_blank" class="btn btn-primary">
+			<i class="fas fa-external-link-alt"></i> View Project
+		</a>
+	</div>
+	{% endif %}
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
