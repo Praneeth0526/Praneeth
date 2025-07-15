@@ -627,10 +627,12 @@ p {
 	bottom: -15px;
 	left: 50%;
 	transform: translateX(-50%);
-	width: 80px;
-	height: 4px;
-	background: var(--gradient-primary);
+	width: 60px;
+	height: 2px;
+	background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
 	border-radius: 2px;
+	opacity: 0.6;
+	transition: all 0.5s ease;
 }
 
 .section-description {
