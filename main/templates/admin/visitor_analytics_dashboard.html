@@ -14,6 +14,9 @@
 {% block content %}
 <div class="analytics-dashboard">
     <h1>{{ title }}</h1>
+    <p style="color: #666; margin-bottom: 20px; font-size: 14px;">
+        <i class="fas fa-clock"></i> All times displayed in Indian Standard Time (IST)
+    </p>
     
     <!-- Statistics Cards -->
     <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
@@ -117,7 +120,7 @@
                                 <small style="color: #666;">{{ visitor.ip_address }}</small>
                             </td>
                             <td style="padding: 8px 12px; border-bottom: 1px solid #eee; font-size: 13px;">
-                                {{ visitor.visited_at|date:"M d, Y H:i" }}
+                                {{ visitor.visited_at|date:"M d, Y H:i" }} IST
                             </td>
                         </tr>
                         {% empty %}
