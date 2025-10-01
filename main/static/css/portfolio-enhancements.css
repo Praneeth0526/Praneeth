@@ -1083,6 +1083,103 @@
 	}
 }
 
+/* Projects Grid Responsive Design */
+@media (max-width: 768px) {
+	.modern-grid {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+	
+	.project-card {
+		max-width: 100%;
+	}
+	
+	.project-image {
+		height: 220px;
+	}
+	
+	.project-content {
+		padding: 1.25rem;
+	}
+	
+	.project-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.75rem;
+	}
+	
+	.project-link {
+		align-self: flex-end;
+	}
+}
+
+@media (max-width: 480px) {
+	.modern-grid {
+		gap: 1rem;
+	}
+	
+	.project-card {
+		border-radius: var(--border-radius-md);
+	}
+	
+	.project-image {
+		height: 200px;
+	}
+	
+	.project-content {
+		padding: 1rem;
+		gap: 0.75rem;
+	}
+	
+	.project-title {
+		font-size: 1.1rem;
+	}
+	
+	.project-description {
+		font-size: 0.9rem;
+		line-height: 1.5;
+	}
+	
+	.project-tags {
+		gap: 0.25rem;
+	}
+	
+	.modern-badge {
+		padding: 0.2rem 0.6rem;
+		font-size: 0.8rem;
+	}
+}
+
+/* Tablet specific adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+	.modern-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.75rem;
+	}
+	
+	.project-card {
+		max-width: 100%;
+	}
+	
+	.project-image {
+		height: 230px;
+	}
+}
+
+/* Large desktop - ensure proper 2-column layout */
+@media (min-width: 1025px) {
+	.modern-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+	
+	.project-card {
+		max-width: 100%;
+	}
+}
+
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
 	.about-grid {

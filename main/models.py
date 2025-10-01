@@ -1,6 +1,7 @@
 import os
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
 import uuid
 from cloudinary.models import CloudinaryField
 from supabase import create_client
@@ -140,3 +141,34 @@ class Certificate(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class VisitorAnalytics(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    ip_address = models.GenericIPAddressField()
+    user_agent = models.TextField(blank=True, null=True)
+    visited_at = models.DateTimeField(auto_now_add=True)
+    session_key = models.CharField(max_length=40, blank=True, null=True)
+    page_url = models.URLField(max_length=500, blank=True, null=True)
+    referrer = models.URLField(max_length=500, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Visitor Analytics"
+        verbose_name_plural = "Visitor Analytics"
+        ordering = ['-visited_at']
+
+    def __str__(self):
+        if self.user:
+            return f"{self.user.username} - {self.visited_at.strftime('%Y-%m-%d %H:%M')}"
+        return f"Guest - {self.visited_at.strftime('%Y-%m-%d %H:%M')}"
+
+    @property
+    def visitor_name(self):
+        if self.user:
+            if self.user.get_full_name():
+                return self.user.get_full_name()
+            elif self.user.email:
+                return self.user.email
+            else:
+                return self.user.username
+        return "Guest"
