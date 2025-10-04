@@ -50,9 +50,43 @@ class VisitorTrackingMiddleware(MiddlewareMixin):
     def should_track_request(self, request):
         """
         Determine if the request should be tracked.
-        Skip admin, static files, favicon, etc.
+        Skip admin, static files, favicon, bots, etc.
         """
         path = request.path.lower()
+        user_agent = request.META.get('HTTP_USER_AGENT', '').lower()
+        
+        # Skip bot requests based on User-Agent
+        bot_patterns = [
+            'uptimerobot',
+            'uptime robot',
+            'mozilla/5.0+(compatible; uptimerobot/',
+            'pingdom',
+            'googlebot',
+            'bingbot',
+            'yahoo! slurp',
+            'facebookexternalhit',
+            'twitterbot',
+            'linkedinbot',
+            'whatsapp',
+            'crawler',
+            'spider',
+            'bot/',
+            'monitoring',
+            'check_http',
+            'nagios',
+            'zabbix',
+            'pingability',
+            'site24x7',
+            'statuscake',
+            'newrelic',
+            'hetrixtools',
+            'updown.io'
+        ]
+        
+        # Check if User-Agent contains any bot patterns
+        for bot_pattern in bot_patterns:
+            if bot_pattern in user_agent:
+                return False
         
         # Skip these paths
         skip_paths = [
@@ -62,7 +96,10 @@ class VisitorTrackingMiddleware(MiddlewareMixin):
             '/favicon.ico',
             '/robots.txt',
             '/sitemap.xml',
-            '/.well-known'
+            '/.well-known',
+            '/health',
+            '/status',
+            '/ping'
         ]
         
         # Skip if path starts with any of the skip_paths

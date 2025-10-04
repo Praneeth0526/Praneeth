@@ -26,6 +26,36 @@ class UserTypeFilter(admin.SimpleListFilter):
             return queryset.filter(user__isnull=True)
 
 
+class BotFilter(admin.SimpleListFilter):
+    title = 'visitor source'
+    parameter_name = 'bot_filter'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('human', 'Human Visitors'),
+            ('bot', 'Bots/Crawlers'),
+            ('uptimerobot', 'UptimeRobot Only'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'human':
+            # Filter out known bots
+            bot_patterns = ['uptimerobot', 'googlebot', 'bingbot', 'crawler', 'spider', 'bot/', 'monitoring']
+            for pattern in bot_patterns:
+                queryset = queryset.exclude(user_agent__icontains=pattern)
+            return queryset
+        elif self.value() == 'bot':
+            # Show only bots
+            from django.db.models import Q
+            bot_query = Q()
+            bot_patterns = ['uptimerobot', 'googlebot', 'bingbot', 'crawler', 'spider', 'bot/', 'monitoring']
+            for pattern in bot_patterns:
+                bot_query |= Q(user_agent__icontains=pattern)
+            return queryset.filter(bot_query)
+        elif self.value() == 'uptimerobot':
+            return queryset.filter(user_agent__icontains='uptimerobot')
+
+
 class AboutAdmin(admin.ModelAdmin):
     list_display = ('text', 'profile','bg', 'has_resume')
     
@@ -52,9 +82,9 @@ class SkillAdmin(admin.ModelAdmin):
     inlines = [TopicInline]
 
 class VisitorAnalyticsAdmin(admin.ModelAdmin):
-    list_display = ('visitor_display', 'ip_address', 'visited_at', 'page_url_short', 'user_agent_short')
-    list_filter = ('visited_at', UserTypeFilter)
-    search_fields = ('user__username', 'user__email', 'ip_address', 'page_url')
+    list_display = ('visitor_display', 'ip_address', 'visited_at', 'page_url_short', 'user_agent_short', 'is_bot_display')
+    list_filter = ('visited_at', UserTypeFilter, BotFilter)
+    search_fields = ('user__username', 'user__email', 'ip_address', 'page_url', 'user_agent')
     readonly_fields = ('visitor_display', 'ip_address', 'user_agent', 'visited_at', 'session_key', 'page_url', 'referrer')
     date_hierarchy = 'visited_at'
     ordering = ['-visited_at']
@@ -86,6 +116,31 @@ class VisitorAnalyticsAdmin(admin.ModelAdmin):
         return obj.user_agent or '-'
     user_agent_short.short_description = 'User Agent'
     
+    def is_bot_display(self, obj):
+        """Display if visitor is likely a bot"""
+        if not obj.user_agent:
+            return format_html('<span style="color: #666;">Unknown</span>')
+        
+        user_agent_lower = obj.user_agent.lower()
+        bot_patterns = ['uptimerobot', 'googlebot', 'bingbot', 'crawler', 'spider', 'bot/', 'monitoring']
+        
+        for pattern in bot_patterns:
+            if pattern in user_agent_lower:
+                if 'uptimerobot' in user_agent_lower:
+                    return format_html(
+                        '<span style="background-color: #dc3545; color: white; padding: 2px 6px; border-radius: 10px; font-size: 10px;">UptimeRobot</span>'
+                    )
+                else:
+                    return format_html(
+                        '<span style="background-color: #ffc107; color: black; padding: 2px 6px; border-radius: 10px; font-size: 10px;">Bot</span>'
+                    )
+        
+        return format_html(
+            '<span style="background-color: #28a745; color: white; padding: 2px 6px; border-radius: 10px; font-size: 10px;">Human</span>'
+        )
+    is_bot_display.short_description = 'Type'
+    is_bot_display.admin_order_field = 'user_agent'
+    
     def get_urls(self):
         """Add custom URLs for analytics dashboard"""
         urls = super().get_urls()
@@ -96,33 +151,47 @@ class VisitorAnalyticsAdmin(admin.ModelAdmin):
     
     def analytics_dashboard_view(self, request):
         """Custom view for analytics dashboard"""
-        # Get total visits
-        total_visits = VisitorAnalytics.objects.count()
+        from django.db.models import Q
         
-        # Get unique visitors (by IP address)
-        unique_visitors = VisitorAnalytics.objects.values('ip_address').distinct().count()
+        # Filter out bots
+        bot_query = Q()
+        bot_patterns = ['uptimerobot', 'googlebot', 'bingbot', 'crawler', 'spider', 'bot/', 'monitoring']
+        for pattern in bot_patterns:
+            bot_query |= Q(user_agent__icontains=pattern)
         
-        # Get registered users visits
-        registered_visits = VisitorAnalytics.objects.filter(user__isnull=False).count()
+        human_visitors = VisitorAnalytics.objects.exclude(bot_query)
         
-        # Get guest visits
-        guest_visits = VisitorAnalytics.objects.filter(user__isnull=True).count()
+        # Get total visits (human only)
+        total_visits = human_visitors.count()
         
-        # Get visits in last 7 days
+        # Get unique visitors (by IP address, human only)
+        unique_visitors = human_visitors.values('ip_address').distinct().count()
+        
+        # Get registered users visits (human only)
+        registered_visits = human_visitors.filter(user__isnull=False).count()
+        
+        # Get guest visits (human only)
+        guest_visits = human_visitors.filter(user__isnull=True).count()
+        
+        # Get visits in last 7 days (human only)
         last_week = datetime.now() - timedelta(days=7)
-        visits_last_week = VisitorAnalytics.objects.filter(visited_at__gte=last_week).count()
+        visits_last_week = human_visitors.filter(visited_at__gte=last_week).count()
         
-        # Get visits in last 24 hours
+        # Get visits in last 24 hours (human only)
         last_24h = datetime.now() - timedelta(hours=24)
-        visits_last_24h = VisitorAnalytics.objects.filter(visited_at__gte=last_24h).count()
+        visits_last_24h = human_visitors.filter(visited_at__gte=last_24h).count()
         
-        # Get top pages
-        top_pages = VisitorAnalytics.objects.values('page_url').annotate(
+        # Get top pages (human only)
+        top_pages = human_visitors.values('page_url').annotate(
             visit_count=Count('id')
         ).order_by('-visit_count')[:10]
         
-        # Get recent visitors
-        recent_visitors = VisitorAnalytics.objects.select_related('user').order_by('-visited_at')[:20]
+        # Get recent visitors (human only)
+        recent_visitors = human_visitors.select_related('user').order_by('-visited_at')[:20]
+        
+        # Get bot statistics for comparison
+        total_bot_visits = VisitorAnalytics.objects.filter(bot_query).count()
+        uptimerobot_visits = VisitorAnalytics.objects.filter(user_agent__icontains='uptimerobot').count()
         
         context = {
             'title': 'Visitor Analytics Dashboard',
@@ -134,6 +203,8 @@ class VisitorAnalyticsAdmin(admin.ModelAdmin):
             'visits_last_24h': visits_last_24h,
             'top_pages': top_pages,
             'recent_visitors': recent_visitors,
+            'total_bot_visits': total_bot_visits,
+            'uptimerobot_visits': uptimerobot_visits,
         }
         
         return render(request, 'admin/visitor_analytics_dashboard.html', context)
