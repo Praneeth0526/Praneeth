@@ -371,6 +371,10 @@
 .current-position {
 	margin: 1rem 0;
 	padding: 0.75rem 0;
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+	justify-content: flex-start;
 }
 
 .position-info {
