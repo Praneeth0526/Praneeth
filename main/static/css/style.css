@@ -16,9 +16,13 @@ body {
   font-weight: 400;
   font-size: 20px;
   line-height: 1.8;
-  color: rgba(0, 0, 0, 0.7);
-  background: linear-gradient(135deg, #F5F5DC 0%, #2F4F4F 100%);
-  background-attachment: fixed; }
+  color: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative; }
+  
   @media screen and (max-width: 992px) {
     body {
       font-size: 22px; } }
