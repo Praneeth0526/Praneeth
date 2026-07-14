@@ -12,20 +12,19 @@
 *
 * ======================================================= */
 body {
-  font-family: "Quicksand", Arial, sans-serif;
+  font-family: 'Inter', "Quicksand", Arial, sans-serif;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 1.8;
-  color: rgba(255, 255, 255, 0.9);
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-attachment: fixed;
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.95);
+  background: transparent;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative; }
   
   @media screen and (max-width: 992px) {
     body {
-      font-size: 22px; } }
+      font-size: 16px; } }
 
 a {
   color: #2c98f0;
