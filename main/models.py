@@ -46,13 +46,16 @@ class Topic(models.Model):
         return self.name
 
 class About(models.Model):
+    name = models.CharField(max_length=100, default="Your Name")
+    role = models.CharField(max_length=100, default="Developer")
+    bio = models.TextField(default="I'm a passionate developer...")
     text = models.TextField()
     bg = models.ImageField(upload_to='images/', blank=True, null=True)
     profile = models.ImageField(upload_to='images/', blank=True, null=True)
     resume = models.FileField(upload_to='resume/', blank=True, null=True)
 
     def __str__(self):
-        return self.text
+        return self.name if self.name else self.text
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -172,3 +175,29 @@ class VisitorAnalytics(models.Model):
             else:
                 return self.user.username
         return "Guest"
+class Experience(models.Model):
+    title = models.CharField(max_length=100)
+    company = models.CharField(max_length=100)
+    date_range = models.CharField(max_length=50)
+    description = models.TextField(blank=True, null=True)
+    is_image = models.BooleanField(default=False)
+    logo = models.ImageField(upload_to='images/', blank=True, null=True)
+    color = models.CharField(max_length=50, default="#e0e7ff", help_text="Hex color for background")
+    icon_svg = models.TextField(blank=True, null=True, help_text="SVG code for icon if not using image")
+    icon_color = models.CharField(max_length=50, blank=True, null=True)
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f"{self.title} at {self.company}"
+
+class ContactSubmission(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message from {self.name}"

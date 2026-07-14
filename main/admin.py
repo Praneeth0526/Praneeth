@@ -6,7 +6,7 @@ from django.urls import path, reverse
 from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime, timedelta
-from .models import Project, Skill, Topic, About, Certificate, Tag, VisitorAnalytics
+from .models import Project, Skill, Topic, About, Certificate, Tag, VisitorAnalytics, Experience, ContactSubmission
 
 
 class UserTypeFilter(admin.SimpleListFilter):
@@ -224,3 +224,5 @@ admin.site.register(Topic)
 admin.site.register(About, AboutAdmin)
 admin.site.register(Certificate)
 admin.site.register(VisitorAnalytics, VisitorAnalyticsAdmin)
+admin.site.register(Experience)
+admin.site.register(ContactSubmission)
