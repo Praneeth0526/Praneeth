@@ -88,7 +88,7 @@ MIDDLEWARE = [
     # 'main.middleware.VisitorTrackingMiddleware',
 ]
 
-APPEND_SLASH = True  # Automatically adds trailing slash
+APPEND_SLASH = False  # Both slash variants registered explicitly in urls.py
 
 ROOT_URLCONF = 'portfolio.urls'
 
