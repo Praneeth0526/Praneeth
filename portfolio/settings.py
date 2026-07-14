@@ -88,7 +88,7 @@ MIDDLEWARE = [
     # 'main.middleware.VisitorTrackingMiddleware',
 ]
 
-APPEND_SLASH = False  # Prevents unwanted redirects on serverless
+APPEND_SLASH = True  # Automatically adds trailing slash
 
 ROOT_URLCONF = 'portfolio.urls'
 
