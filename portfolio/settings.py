@@ -38,7 +38,7 @@ import cloudinary.api
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY', default='unsafe-secret-key-change-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENVIRONMENT == 'development':
@@ -53,6 +53,10 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
 ]
+
+# Trust Vercel's proxy for HTTPS (prevents redirect loops)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = False  # Vercel handles SSL termination
 
 
 # Application definition
@@ -115,7 +119,7 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 # }
 
 DATABASES = {
-    'default': env.db('DATABASE_URL')
+    'default': env.db('DATABASE_URL', default=f'sqlite:///{BASE_DIR}/db.sqlite3')
 }
 
 # Password validation
@@ -174,20 +178,20 @@ cloudinary.config(
 )
 
 
-# Load from .env
-SUPABASE_S3_ACCESS_KEY = config('SUPABASE_S3_ACCESS_KEY')
-SUPABASE_S3_SECRET_KEY = config('SUPABASE_S3_SECRET_KEY')
-SUPABASE_S3_REGION_NAME = config('SUPABASE_S3_REGION_NAME')
-SUPABASE_S3_ENDPOINT_URL = config('SUPABASE_S3_ENDPOINT_URL')
+# Load from .env (with safe defaults so Django doesn't crash if vars missing)
+SUPABASE_S3_ACCESS_KEY = config('SUPABASE_S3_ACCESS_KEY', default='')
+SUPABASE_S3_SECRET_KEY = config('SUPABASE_S3_SECRET_KEY', default='')
+SUPABASE_S3_REGION_NAME = config('SUPABASE_S3_REGION_NAME', default='us-east-1')
+SUPABASE_S3_ENDPOINT_URL = config('SUPABASE_S3_ENDPOINT_URL', default='')
 # Supabase Configuration
-SUPABASE_URL = env("SUPABASE_URL")
-SUPABASE_KEY = env("SUPABASE_KEY")
+SUPABASE_URL = env("SUPABASE_URL", default='')
+SUPABASE_KEY = env("SUPABASE_KEY", default='')
 SUPABASE_BUCKET = 'staticfiles'
 
 # Additional S3-compatible settings for Supabase
-SUPABASE_S3_ENDPOINT = f"{SUPABASE_URL}/storage/v1/s3"
-SUPABASE_S3_ACCESS_KEY = env("SUPABASE_S3_ACCESS_KEY")  # From Supabase dashboard
-SUPABASE_S3_SECRET_KEY = env("SUPABASE_S3_SECRET_KEY")  # From Supabase dashboard
+SUPABASE_S3_ENDPOINT = f"{SUPABASE_URL}/storage/v1/s3" if SUPABASE_URL else ''
+SUPABASE_S3_ACCESS_KEY = env("SUPABASE_S3_ACCESS_KEY", default='')
+SUPABASE_S3_SECRET_KEY = env("SUPABASE_S3_SECRET_KEY", default='')
 
 # Django Storage Configuration (Django 5.x style)
 STORAGES = {
