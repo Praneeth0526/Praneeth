@@ -88,7 +88,7 @@ MIDDLEWARE = [
     # 'main.middleware.VisitorTrackingMiddleware',
 ]
 
-APPEND_SLASH = False  # Both slash variants registered explicitly in urls.py
+APPEND_SLASH = True  # Safe now: both /api/portfolio and /api/portfolio/ are registered explicitly
 
 ROOT_URLCONF = 'portfolio.urls'
 
