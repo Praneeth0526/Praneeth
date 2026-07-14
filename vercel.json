@@ -12,7 +12,8 @@
   ],
   "routes": [
     { "src": "/admin(.*)", "dest": "portfolio/wsgi.py" },
-    { "src": "/api/(.*)", "dest": "portfolio/wsgi.py" },
+    { "src": "/api/portfolio(.*)", "dest": "portfolio/wsgi.py" },
+    { "src": "/api/contact(.*)", "dest": "portfolio/wsgi.py" },
     { "src": "/static/(.*)", "dest": "portfolio/wsgi.py" }
   ]
 }

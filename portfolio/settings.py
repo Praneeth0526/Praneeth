@@ -77,15 +77,18 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'main.middleware.SimpleCorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Correct middleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'main.middleware.VisitorTrackingMiddleware',  # Custom visitor tracking
+    # VisitorTrackingMiddleware disabled on serverless (causes DB issues)
+    # 'main.middleware.VisitorTrackingMiddleware',
 ]
+
+APPEND_SLASH = False  # Prevents unwanted redirects on serverless
 
 ROOT_URLCONF = 'portfolio.urls'
 
