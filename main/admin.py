@@ -225,4 +225,14 @@ admin.site.register(About, AboutAdmin)
 admin.site.register(Certificate)
 admin.site.register(VisitorAnalytics, VisitorAnalyticsAdmin)
 admin.site.register(Experience)
-admin.site.register(ContactSubmission)
+@admin.register(ContactSubmission)
+class ContactSubmissionAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'created_at', 'message_preview')
+    list_filter = ('created_at',)
+    search_fields = ('name', 'email', 'message')
+    readonly_fields = ('created_at',)
+    ordering = ('-created_at',)
+
+    def message_preview(self, obj):
+        return obj.message[:80] + '...' if len(obj.message) > 80 else obj.message
+    message_preview.short_description = 'Message'
