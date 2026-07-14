@@ -1,0 +1,19 @@
+{
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/next"
+    },
+    {
+      "src": "portfolio/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb" }
+    }
+  ],
+  "routes": [
+    { "src": "/admin(.*)", "dest": "portfolio/wsgi.py" },
+    { "src": "/api/(.*)", "dest": "portfolio/wsgi.py" },
+    { "src": "/static/(.*)", "dest": "portfolio/wsgi.py" },
+    { "src": "/(.*)", "dest": "frontend/$1" }
+  ]
+}
