@@ -51,12 +51,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://praneeth-g.vercel.app',
     'https://*.vercel.app',
     'http://localhost:3000',
-    'http://127.0.0.1:3000',
 ]
-
-# Trust Vercel's proxy for HTTPS (prevents redirect loops)
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = False  # Vercel handles SSL termination
 
 
 # Application definition
