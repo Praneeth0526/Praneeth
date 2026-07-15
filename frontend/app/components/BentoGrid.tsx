@@ -504,8 +504,7 @@ export default function BentoGrid({ data }: { data: DjangoData }) {
               <FiMapPin size={12} /> MYS ⇄ BLR
             </div>
             <p className="tile-desc" style={{ fontSize: '16px', maxWidth: '90%', textAlign: 'justify' }}>
-              I build cross-platform mobile apps, integrate APIs, and craft data systems. 
-              Always focusing on elegant solutions to complex problems.
+              {about.bio || "I build cross-platform mobile apps, integrate APIs, and craft data systems. Always focusing on elegant solutions to complex problems."}
             </p>
 
             {/* Achievements */}
