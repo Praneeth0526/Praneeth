@@ -225,7 +225,7 @@ export default function BentoGrid({ data }: { data: DjangoData }) {
         body {
           background-color: var(--bg-main);
           color: var(--text-primary);
-          font-family: var(--font-inter);
+          font-family: var(--font-body);
           margin: 0;
           padding: 0;
           -webkit-font-smoothing: antialiased;
@@ -321,7 +321,7 @@ export default function BentoGrid({ data }: { data: DjangoData }) {
         }
         
         .tile-title {
-          font-family: var(--font-brico);
+          font-family: var(--font-heading);
           font-size: 24px;
           font-weight: 600;
           color: var(--text-primary);
@@ -559,8 +559,8 @@ export default function BentoGrid({ data }: { data: DjangoData }) {
             </div>
           </div>
 
-          {/* Tech Stack (2x2) */}
-          <div className="tile col-span-2 row-span-2" style={{ gridColumn: 'span 2', gridRow: 'span 2' }}>
+          {/* Tech Stack (2x1) */}
+          <div className="tile col-span-2 row-span-1" style={{ gridColumn: 'span 2', gridRow: 'span 1' }}>
             <h2 className="tile-title" style={{ marginBottom: '16px' }}>Tech Stack & Hobbies</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', overflowY: 'auto' }}>
               <div className="tech-category">
@@ -628,6 +628,21 @@ export default function BentoGrid({ data }: { data: DjangoData }) {
                   <div className="tech-chip" style={{ width: 'auto', padding: '0 12px', fontSize: '13px', gap: '6px', fontWeight: 500 }}>🧘‍♂️ Yoga</div>
                   <div className="tech-chip" style={{ width: 'auto', padding: '0 12px', fontSize: '13px', gap: '6px', fontWeight: 500 }}>🏊‍♂️ Swimming</div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Volunteering (2x1) */}
+          <div className="tile col-span-2" style={{ gridColumn: 'span 2', display: 'flex', flexDirection: 'column', justifyItems: 'center' }}>
+            <h2 className="tile-title" style={{ marginBottom: '16px', fontSize: '18px' }}>Volunteering</h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, padding: '4px' }}>
+                <img src="/images/fossunited200_200px.svg" alt="FOSS United" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '15px', fontWeight: 600, margin: '0 0 4px 0', color: '#e2e8f0' }}>FOSS United</h3>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: '0 0 4px 0' }}>Mysore Chapter</p>
+                <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', margin: 0 }}>Core Member</p>
               </div>
             </div>
           </div>
@@ -761,30 +776,15 @@ export default function BentoGrid({ data }: { data: DjangoData }) {
             </div>
           </div>
 
-          {/* Volunteering (2x1) */}
-          <div className="tile col-span-2" style={{ gridColumn: 'span 2', display: 'flex', flexDirection: 'column', justifyItems: 'center' }}>
-            <h2 className="tile-title" style={{ marginBottom: '16px', fontSize: '18px' }}>Volunteering</h2>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, padding: '4px' }}>
-                <img src="/images/fossunited200_200px.svg" alt="FOSS United" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-              </div>
-              <div>
-                <h3 style={{ fontSize: '15px', fontWeight: 600, margin: '0 0 4px 0', color: '#e2e8f0' }}>FOSS United</h3>
-                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: '0 0 4px 0' }}>Mysore Chapter</p>
-                <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', margin: 0 }}>Core Member</p>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA Contact (4x1) */}
-          <div className="tile col-span-4 cta-tile" style={{ gridColumn: 'span 4', alignItems: 'center', textAlign: 'center', padding: '48px' }}>
+          {/* CTA Contact (2x1) */}
+          <div className="tile col-span-2 cta-tile" style={{ gridColumn: 'span 2' }}>
             <div>
-              <h1 className="tile-title" style={{ fontSize: '32px', marginBottom: '8px' }}>Let&apos;s create what&apos;s next.</h1>
-              <p className="tile-desc" style={{ fontSize: '16px', marginBottom: '0' }}>
+              <h1 className="tile-title" style={{ fontSize: '24px', marginBottom: '8px' }}>Let&apos;s create what&apos;s next.</h1>
+              <p className="tile-desc" style={{ fontSize: '14px', marginBottom: '0' }}>
                 Open to meaningful collaborations and opportunities.
               </p>
             </div>
-            <SpecularButton href="/contact" className="cta-button" style={{ marginTop: '24px' }}>
+            <SpecularButton href="/contact" className="cta-button">
               Let&apos;s talk <FiArrowRight />
             </SpecularButton>
           </div>
