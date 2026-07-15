@@ -49,20 +49,43 @@ export default function ContactPage() {
   })
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', position: 'relative', backgroundColor: '#121212', fontFamily: '"Inter", sans-serif' }}>
+    <div className="contact-container" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', position: 'relative', backgroundColor: '#121212', fontFamily: '"Inter", sans-serif' }}>
+      <style dangerouslySetInnerHTML={{ __html: `
+        .contact-card {
+          max-width: 900px;
+          width: 100%;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 48px;
+          background: rgba(10, 10, 10, 0.5);
+          backdrop-filter: blur(32px);
+          -webkit-backdrop-filter: blur(32px);
+          padding: 56px;
+          border-radius: 32px;
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          box-shadow: 0 24px 64px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+        @media (max-width: 768px) {
+          .contact-container {
+            padding: 16px !important;
+          }
+          .contact-card {
+            grid-template-columns: 1fr;
+            padding: 32px 20px;
+            gap: 32px;
+          }
+          .contact-title {
+            font-size: 36px !important;
+          }
+        }
+      `}} />
       <Galaxy 
         mouseRepulsion={false} mouseInteraction={false} density={0.5}
         glowIntensity={0.2} saturation={0.5} hueShift={240} transparent={true}
         style={{ zIndex: -1, position: 'fixed', inset: 0, pointerEvents: 'none' }}
       />
       
-      <div style={{ 
-        maxWidth: '900px', width: '100%', 
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '48px',
-        background: 'rgba(10,10,10,0.5)', backdropFilter: 'blur(32px)', 
-        padding: '56px', borderRadius: '32px', border: '1px solid rgba(255,255,255,0.06)', 
-        boxShadow: '0 24px 64px -12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04)' 
-      }}>
+      <div className="contact-card">
         
         {/* Left Column: Info */}
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -71,11 +94,11 @@ export default function ContactPage() {
               <FiArrowLeft /> Back to Home
             </Link>
             
-            <h1 style={{ fontFamily: '"Bricolage Grotesque", sans-serif', fontSize: '48px', fontWeight: 600, color: '#e2e8f0', margin: '0 0 16px 0', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
-              Let's build<br />something great.
+            <h1 className="contact-title" style={{ fontFamily: '"Bricolage Grotesque", sans-serif', fontSize: '48px', fontWeight: 600, color: '#e2e8f0', margin: '0 0 16px 0', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
+              Let&apos;s build<br />something great.
             </h1>
             <p style={{ color: '#888', fontSize: '16px', lineHeight: 1.6, maxWidth: '90%' }}>
-              I'm actively looking for new opportunities and collaborations. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+              I&apos;m actively looking for new opportunities and collaborations. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
             </p>
           </div>
           
@@ -91,7 +114,7 @@ export default function ContactPage() {
             <div style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px', background: 'rgba(74,222,128,0.05)', border: '1px solid rgba(74,222,128,0.2)', borderRadius: '24px', color: '#4ade80', textAlign: 'center' }}>
               <FiCheckCircle size={48} style={{ marginBottom: '16px' }} />
               <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '8px', color: '#fff' }}>Message Sent!</h3>
-              <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.7)', margin: 0 }}>Thanks for reaching out. I'll get back to you as soon as possible.</p>
+              <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.7)', margin: 0 }}>Thanks for reaching out. I&apos;ll get back to you as soon as possible.</p>
               <button onClick={() => setStatus('idle')} style={{ marginTop: '24px', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', padding: '10px 20px', borderRadius: '99px', cursor: 'pointer' }}>Send another message</button>
             </div>
           ) : (
